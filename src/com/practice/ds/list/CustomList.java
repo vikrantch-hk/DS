@@ -45,6 +45,12 @@ public class CustomList {
 		q.setNext(null);
 	}
 
+	public void deleteFirst() {
+		if (head == null)
+			return;
+		head = head.getNext();
+	}
+	
 	public void traverse() {
 		ListNode temp = head;
 		while (temp != null) {
@@ -62,6 +68,9 @@ public class CustomList {
 		cl.addFirst(20);
 		cl.traverse();
 		cl.deleteLast();
+		System.out.println();
+		cl.traverse();
+		cl.deleteFirst();
 		System.out.println();
 		cl.traverse();
 	}
