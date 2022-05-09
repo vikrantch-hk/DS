@@ -1,0 +1,2 @@
+to get thread dump to detect lock
+jcmd PID Thread.print
