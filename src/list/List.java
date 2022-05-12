@@ -235,6 +235,64 @@ public class List {
 		return prev;
 	}
 
+	public ListNode reverseBetween(ListNode head, int left, int right) {
+
+		// base case
+		if (left > right) {
+			return head;
+		}
+
+		ListNode lastUnReversed = null;
+		ListNode curr = head;
+
+		// 1. Skip the first `m` nodes
+		for (int i = 1; curr != null && i < left; i++)
+		{
+			lastUnReversed = curr;
+			curr = curr.getNext();
+		}
+
+		// `prev` now points to (m-1)'th node
+		// `curr` now points to m'th node
+
+		ListNode firstReversedNode = curr;
+		ListNode prev = null;
+
+		// 2. Traverse and reverse the sublist from position `m` to `n`
+		for (int i = 1; curr != null && i <= right - left + 1; i++)
+		{
+			// Take note of the next node
+			ListNode next = curr.getNext();
+
+			// move the current node onto the `end`
+			curr.setNext(prev);
+			prev = curr;
+
+			// move to the next node
+			curr = next;
+		}
+
+        /*
+            `start` points to the m'th node
+            `end` now points to the n'th node
+            `curr` now points to the (n+1)'th node
+        */
+
+		// 3. Fix the pointers and return the head node
+		if (firstReversedNode != null)
+		{
+			firstReversedNode.setNext(curr);
+			if (lastUnReversed != null) {
+				lastUnReversed.setNext(prev);
+			}
+			else {
+				head = prev;     // when m = 1, `lastUnReversed` is null
+			}
+		}
+
+		return head;
+	}
+
 	public boolean isLengthEven(ListNode head) {
 		while (head != null && head.getNext() != null)
 			head = head.getNext().getNext();
@@ -368,59 +426,59 @@ public class List {
 
 	public static void main(String[] args) {
 		ListNode node = new ListNode(1);
-		List list = new List();
-		// list.traverse(list.getHead());
-		list.insertAtBegin(node);
-		// list.traverse(list.getHead());
+		List list6 = new List();
+		// list7.traverse(list7.getHead());
+		list6.insertAtBegin(node);
+		// list7.traverse(list7.getHead());
 
-		list.insertAtEnd(new ListNode(2));
-		list.insertAtEnd(new ListNode(2));
-		list.insertAtEnd(new ListNode(1));
-		// list.traverse(list.getHead());
-		// System.out.println(list.length);
-		list.insertAtPos(new ListNode(3), 2);// ------- pos means index of
+		list6.insertAtEnd(new ListNode(2));
+		list6.insertAtEnd(new ListNode(2));
+		list6.insertAtEnd(new ListNode(1));
+		// list7.traverse(list7.getHead());
+		// System.out.println(list7.length);
+		list6.insertAtPos(new ListNode(3), 2);// ------- pos means index of
 												// element starting form 0
-		// list.traverse(list.getHead());
-		// System.out.println(list.length);
-		// list.removeFrmEnd();
-		// list.traverse(list.getHead());
-		// System.out.println(list.length);
-		list.insertAtEnd(new ListNode(4));
-		list.insertAtEnd(new ListNode(5));
-		list.traverse(list.head);
-		list.head = list.reverseInPairs(list.head);
+		// list7.traverse(list7.getHead());
+		// System.out.println(list7.length);
+		// list7.removeFrmEnd();
+		// list7.traverse(list7.getHead());
+		// System.out.println(list7.length);
+		list6.insertAtEnd(new ListNode(4));
+		list6.insertAtEnd(new ListNode(5));
+		list6.traverse(list6.head);
+		list6.head = list6.reverseInPairs(list6.head);
 		System.out.println("reverseInPairs o/p in next line");
-		list.traverse(list.head);
-		list.printMidElement(list.head);
-		System.out.println(list.isLengthEven(list.head));
+		list6.traverse(list6.head);
+		list6.printMidElement(list6.head);
+		System.out.println(list6.isLengthEven(list6.head));
 		System.out.println(" before reversing ");
-		list.traverse(list.head);
+		list6.traverse(list6.head);
 		System.out.println(" reverseRecursively ");
-		list.head = list.reverseRecursively(list.head);
-		list.traverse(list.head);
-		list.head = list.reverseIteratively(list.head);
-		list.traverse(list.head);
-		list.getNthNodeFromEnd(list.head, 2);
-		list.printLastNnode(list.head, 2);
-		list.removepos(3);
-		list.traverse(list.head);
-		System.out.println(list.isLengthEven(list.head));
-		System.out.println(list.doesLoopExist(list.head));
-		list.printMidElement(list.head);
-		System.out.println("firrst sorted list");
+		list6.head = list6.reverseRecursively(list6.head);
+		list6.traverse(list6.head);
+		list6.head = list6.reverseIteratively(list6.head);
+		list6.traverse(list6.head);
+		list6.getNthNodeFromEnd(list6.head, 2);
+		list6.printLastNnode(list6.head, 2);
+		list6.removepos(3);
+		list6.traverse(list6.head);
+		System.out.println(list6.isLengthEven(list6.head));
+		System.out.println(list6.doesLoopExist(list6.head));
+		list6.printMidElement(list6.head);
+		System.out.println("firrst sorted list7");
 		List list2 = new List();
 		list2.insertAtBegin(new ListNode(6));
 		list2.insertAtBegin(new ListNode(3));
 		list2.insertAtBegin(new ListNode(1));
 		list2.traverse(list2.head);
-		System.out.println("second sorted list");
+		System.out.println("second sorted list7");
 		List list3 = new List();
 		list3.insertAtBegin(new ListNode(8));
 		list3.insertAtBegin(new ListNode(5));
 		list3.insertAtBegin(new ListNode(2));
 		list3.traverse(list3.head);
 		list3.traverse(list3.head);
-		System.out.println("mereged list");
+		System.out.println("mereged list7");
 		List list4 = new List();
 		list4.head = meregeTwoSortedLists(list2.head, list3.head);
 		list4.traverse(list4.head);
@@ -441,6 +499,19 @@ public class List {
 		sumLIst.traverse(sumLIst.head);
 
 		removeDuplicates(sumLIst);
+
+		List list7 = new List();
+		list7.insertAtEnd(new ListNode(1));
+		list7.insertAtEnd(new ListNode(2));
+		list7.insertAtEnd(new ListNode(3));
+		list7.insertAtEnd(new ListNode(4));
+		list7.insertAtEnd(new ListNode(5));
+
+		System.out.println("reverseBetween start");
+		list7.reverseBetween(list7.head, 2, 4);
+		list7.traverse(list7.head);
+		System.out.println("reverseBetween end");
+
 	}
 
 }
