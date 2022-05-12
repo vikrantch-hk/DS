@@ -460,25 +460,40 @@ public class List {
 		return a.getData();
 	}
 
+	// Given two sorted linked lists, given an algorithm for the printing common elements of them.
+	public static void commonElement(ListNode head1, ListNode head2) {
+		while (head1 != null && head2 != null) {
+			if (head1.getData() == head2.getData()) {
+				System.out.println(head1.getData());
+				head1 = head1.getNext();
+				head2 = head2.getNext();
+			} else if (head1.getData() > head2.getData()) {
+				head2 = head2.getNext();
+			} else {
+				head1 = head1.getNext();
+			}
+		}
+	}
+
 	public static void main(String[] args) {
 		ListNode node = new ListNode(1);
 		List list6 = new List();
-		// list7.traverse(list7.getHead());
+		// list9.traverse(list9.getHead());
 		list6.insertAtBegin(node);
-		// list7.traverse(list7.getHead());
+		// list9.traverse(list9.getHead());
 
 		list6.insertAtEnd(new ListNode(2));
 		list6.insertAtEnd(new ListNode(2));
 		list6.insertAtEnd(new ListNode(1));
-		// list7.traverse(list7.getHead());
-		// System.out.println(list7.length);
+		// list9.traverse(list9.getHead());
+		// System.out.println(list9.length);
 		list6.insertAtPos(new ListNode(3), 2);// ------- pos means index of
 												// element starting form 0
-		// list7.traverse(list7.getHead());
-		// System.out.println(list7.length);
-		// list7.removeFrmEnd();
-		// list7.traverse(list7.getHead());
-		// System.out.println(list7.length);
+		// list9.traverse(list9.getHead());
+		// System.out.println(list9.length);
+		// list9.removeFrmEnd();
+		// list9.traverse(list9.getHead());
+		// System.out.println(list9.length);
 		list6.insertAtEnd(new ListNode(4));
 		list6.insertAtEnd(new ListNode(5));
 		list6.traverse(list6.head);
@@ -501,20 +516,20 @@ public class List {
 		System.out.println(list6.isLengthEven(list6.head));
 		System.out.println(list6.doesLoopExist(list6.head));
 		list6.printMidElement(list6.head);
-		System.out.println("firrst sorted list7");
+		System.out.println("firrst sorted list9");
 		List list2 = new List();
 		list2.insertAtBegin(new ListNode(6));
 		list2.insertAtBegin(new ListNode(3));
 		list2.insertAtBegin(new ListNode(1));
 		list2.traverse(list2.head);
-		System.out.println("second sorted list7");
+		System.out.println("second sorted list9");
 		List list3 = new List();
 		list3.insertAtBegin(new ListNode(8));
 		list3.insertAtBegin(new ListNode(5));
 		list3.insertAtBegin(new ListNode(2));
 		list3.traverse(list3.head);
 		list3.traverse(list3.head);
-		System.out.println("mereged list7");
+		System.out.println("mereged list9");
 		List list4 = new List();
 		list4.head = meregeTwoSortedLists(list2.head, list3.head);
 		list4.traverse(list4.head);
@@ -550,6 +565,25 @@ public class List {
 
 		System.out.println("FindJosephusPos start");
 		System.out.println(new List().FindJosephusPos(41, 2));
+		System.out.println("FindJosephusPos end");
+
+		List list8 = new List();
+		list8.insertAtEnd(new ListNode(2));
+		list8.insertAtEnd(new ListNode(4));
+		list8.insertAtEnd(new ListNode(5));
+		list8.insertAtEnd(new ListNode(8));
+		list8.insertAtEnd(new ListNode(10));
+
+		List list9 = new List();
+		list9.insertAtEnd(new ListNode(1));
+		list9.insertAtEnd(new ListNode(2));
+		list9.insertAtEnd(new ListNode(3));
+		list9.insertAtEnd(new ListNode(4));
+		list9.insertAtEnd(new ListNode(5));
+
+		System.out.println("commonElement start");
+		commonElement(list9.head, list8.head);
+		System.out.println("commonElement end");
 
 	}
 
