@@ -424,6 +424,42 @@ public class List {
 		return -1;
 	}
 
+	// https://www.geeksforgeeks.org/josephus-problem-set-1-a-on-solution/
+	public int FindJosephusPos(int n, int m) {
+		// create a circle
+		ListNode p, q;
+		p = new ListNode(1);
+		head = p;
+		q = p;
+		for (int i = 2; i <= n; i++) {
+			ListNode temp = new ListNode(i);
+			p.setNext(temp);
+			p = p.getNext();
+		}
+		// point last node to head to make circle
+		p.setNext(q);
+		// delete node from mth pos u=until list is greater than 0 size
+		/* while only one node is left in the
+	    linked list*/
+		ListNode a=head;
+		ListNode b=null;
+		while(a.getNext()!=a)
+		{
+			int count =1;
+			while(count<m)
+			{
+				b=a;
+				a=a.getNext();
+				count++;
+			}
+			/* Remove the m-th node and start from it's next in next loop*/
+			b.setNext(a.getNext());
+			a=b.getNext();
+
+		}
+		return a.getData();
+	}
+
 	public static void main(String[] args) {
 		ListNode node = new ListNode(1);
 		List list6 = new List();
@@ -511,6 +547,9 @@ public class List {
 		list7.reverseBetween(list7.head, 2, 4);
 		list7.traverse(list7.head);
 		System.out.println("reverseBetween end");
+
+		System.out.println("FindJosephusPos start");
+		System.out.println(new List().FindJosephusPos(41, 2));
 
 	}
 
