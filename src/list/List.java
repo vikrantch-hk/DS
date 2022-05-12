@@ -461,6 +461,7 @@ public class List {
 	}
 
 	// Given two sorted linked lists, given an algorithm for the printing common elements of them.
+	// O(􏰒m + n)
 	public static void commonElement(ListNode head1, ListNode head2) {
 		while (head1 != null && head2 != null) {
 			if (head1.getData() == head2.getData()) {
