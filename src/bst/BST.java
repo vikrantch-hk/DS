@@ -433,7 +433,7 @@ public class BST {
 		
 		if(node !=null) {
 			stack.push(node.data);
-			
+
 			
 			printRootToLeaf(node.left, stack, stack2);
 			if(node.left == null && node.right==null)
@@ -635,9 +635,11 @@ public class BST {
 	public int getDiameterHeight(BSTNode node) {
 		if(node==null)
 			return 0;
-		diameter=Math.max(diameter, 
-				1+getDiameterHeight(node.left)+getDiameterHeight(node.right));
-		return 1+Math.max(getDiameterHeight(node.left), getDiameterHeight(node.right));
+		int leftHeight = getDiameterHeight(node.left);
+		int rightHeight = getDiameterHeight(node.right);
+		diameter=Math.max(diameter, leftHeight+rightHeight);
+
+		return 1+Math.max(leftHeight, rightHeight);
 		
 	}
 	
