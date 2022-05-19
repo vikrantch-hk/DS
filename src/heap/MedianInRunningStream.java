@@ -71,6 +71,7 @@ public class MedianInRunningStream {
      * if min heap becomes small in size poll from max heap
      * */
 
+	// TC the add operation is O(logn),
     public static void addNum(int num) {
         minHeap.add(num);
         maxHeap.add(minHeap.poll());
@@ -79,6 +80,7 @@ public class MedianInRunningStream {
         }
     }
 
+    // TC  The findMedian operation is O(1).
     public static double findMedian() {
         if (minHeap.size() > maxHeap.size()) {
             return minHeap.peek();
