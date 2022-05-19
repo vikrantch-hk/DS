@@ -5,8 +5,8 @@ import java.util.Set;
 
 public class List {
 
-	ListNode head;
-	int length;
+	public ListNode head;
+	public int length;
 
 	public void insertAtBegin(ListNode node) {
 		node.setNext(head);
