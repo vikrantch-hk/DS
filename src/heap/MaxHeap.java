@@ -3,7 +3,10 @@ package heap;
 import list.List;
 import list.ListNode;
 
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.PriorityQueue;
 
 // in java api Heap is implemented using Priority Queue
@@ -73,8 +76,9 @@ public class MaxHeap {
 		}
 		System.out.println(" mergeKLists end ");
 
-
-
+		System.out.println(" maxSlidingWindow start ");
+		Arrays.stream(maxSlidingWindow(new int[]{1,3,-1,-3,5,3,6,7}, 3)).forEach(i->System.out.println(i));
+		System.out.println(" maxSlidingWindow end ");
 	}
 
 	// https://leetcode.com/problems/merge-k-sorted-lists/submissions/
@@ -100,6 +104,32 @@ public class MaxHeap {
 			}
 		}
 		return head.getNext();
+	}
+
+	// https://leetcode.com/problems/sliding-window-maximum/submissions/
+	// TC o(2n)=o(n) each element could be inserted or removed at most once
+	public static int[] maxSlidingWindow(int[] nums, int k) {
+		if(nums==null || k<=0){
+			return new int[0];
+		}
+
+		int n=nums.length;
+		int[] r= new int[n-k+1];
+		int ri=0;
+		Deque<Integer> q = new LinkedList<>();
+		for(int i=0;i<n;i++){
+			while(!q.isEmpty() && q.peek()<i-k+1){
+				q.poll();
+			}
+			while(!q.isEmpty() && nums[q.peekLast()]<nums[i]){
+				q.pollLast();
+			}
+			q.offer(i);
+			if(i>=k-1){
+				r[ri++]=nums[q.peek()];
+			}
+		}
+		return r;
 	}
 
 }
