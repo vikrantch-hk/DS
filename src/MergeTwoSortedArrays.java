@@ -1,7 +1,7 @@
 
 public class MergeTwoSortedArrays {
 	
-	
+	// Time Complexity: O(􏰝m + 􏰅n). Space Complexity: O(1).
 	public static void merge(int[] a,int[] b)
 	{
 		int m=a.length;
