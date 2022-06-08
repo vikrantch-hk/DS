@@ -1,5 +1,6 @@
 public class FindMinInRotatedArray {
 
+	// Time complexity: O(􏰄􏰅􏰆􏰂). Space complexity: O(􏰄􏰅􏰆􏰂) for recursive stack.
 	public static int FindMin(int arr[], int low, int high) {
 		if (high < low)
 		{
