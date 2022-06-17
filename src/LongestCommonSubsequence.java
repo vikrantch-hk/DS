@@ -15,6 +15,7 @@ import java.util.Set;
 import java.util.TreeSet;
  
 /** Class  LongestCommonSubsequence **/
+// Time Complexity of the above implementation is O(mn)
 public class  LongestCommonSubsequence
 {    
 	/*private boolean equals(Object arg0) {
@@ -37,31 +38,34 @@ public class  LongestCommonSubsequence
  
         int[][] arr = new int[l1 + 1][l2 + 1];
  
-        for (int i = l1 - 1; i >= 0; i--)
+        for (int i = 0; i <=l1; i++)
         {
-            for (int j = l2 - 1; j >= 0; j--)
+            for (int j = 0; j<=l2; j++)
             {
-                if (str1.charAt(i) == str2.charAt(j))
-                    arr[i][j] = arr[i + 1][j + 1] + 1;
+                if(i==0 ||j==0){
+                    arr[i][j]=0;
+                }
+                else if (str1.charAt(i-1) == str2.charAt(j-1))
+                    arr[i][j] = arr[i-1][j-1] + 1;
                 else 
-                    arr[i][j] = Math.max(arr[i + 1][j], arr[i][j + 1]);
+                    arr[i][j] = Math.max(arr[i][j-1], arr[i-1][j]);
             }
         }
  
-        int i = 0, j = 0;
+        int i = l1, j = l2;
         StringBuffer sb = new StringBuffer();
-        while (i < l1 && j < l2) 
+        while (i > 0 && j > 0)
         {
-            if (str1.charAt(i) == str2.charAt(j)) 
+            if (str1.charAt(i-1) == str2.charAt(j-1))
             {
-                sb.append(str1.charAt(i));
-                i++;
-                j++;
+                sb.append(str1.charAt(i-1));
+                i--;
+                j--;
             }
-            else if (arr[i + 1][j] >= arr[i][j + 1]) 
-                i++;
+            else if (arr[i][j-1] >= arr[i-1][j])
+                j--;
             else
-                j++;
+                i--;
         }
         return sb.toString();
     }
@@ -87,10 +91,10 @@ public class  LongestCommonSubsequence
         System.out.println("Longest Common Subsequence Algorithm Test\n");
  
         System.out.println("\nEnter string 1");
-        String str1 = br.readLine();
+        String str1 = br.readLine();//XMJYAUZ
  
         System.out.println("\nEnter string 2");
-        String str2 = br.readLine();
+        String str2 = br.readLine();//MZJAWXU
  
         LongestCommonSubsequence obj = new LongestCommonSubsequence(); 
         String result = obj.lcs(str1, str2);
