@@ -32,8 +32,32 @@ public class ReverseString {
 		System.out.println(new String(arr));
 	}
 
+	public static void reverseWords(String s)
+	{
+		String[] a = s.trim().split(" ");
+
+		int l=0;
+		int r=a.length-1;
+		while(l<=r){
+			String t=a[l];
+			a[l]=a[r];
+			a[r]=t;
+			l++;
+			r--;
+		}
+		StringBuilder sb = new StringBuilder();
+		for(int i=0;i<a.length-1;i++){
+			if(!a[i].trim().equals("")){
+				sb.append(a[i]+" ");
+			}
+		}
+		sb.append(a[a.length-1]);
+		System.out.println(sb.toString());
+	}
+
 	public static void main(String[] args) {
 		reverse("abcdbe");
 		reverseWithBitwise("abcdbe");
+		reverseWords("the sky is blue");// blue is sky the
 	}
 }
