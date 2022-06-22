@@ -53,4 +53,12 @@ public class MinimumWindowSubstring {
 
         return s.substring(minLeft, minLeft + minLen);
     }
+
+    public static void main(String[] args) {
+        System.out.println(minWindow("ADOBECODEBANC","ABC"));
+        System.out.println(minWindow("a","a"));
+        System.out.println(minWindow("ABBACBAA","AAB"));
+        System.out.println(minWindow("BBA","AB"));
+        System.out.println(minWindow("a","aa"));
+    }
 }
