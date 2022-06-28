@@ -66,13 +66,13 @@ public class WeightedJobScheduling {
 			{
 				if(list.get(mid+1).end<=list.get(i).start)
 				{
-					return mid+1;
+					low= mid+1;
 				}
 				else
 					return mid;
 			}
 			else
-				return mid-1;
+				high= mid-1;
 		}
 		return -1;
 	}
