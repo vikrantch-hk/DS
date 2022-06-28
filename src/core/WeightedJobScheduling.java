@@ -27,10 +27,12 @@ public class WeightedJobScheduling {
 	
 	public static void main(String[] args) {
 		List<Job> list = new ArrayList<Job>();
-		list.add(new Job(1, 2, 50));
-		list.add(new Job(3, 5, 20));
-		list.add(new Job(6, 19, 100));
-		list.add(new Job(2, 100, 200));
+		list.add(new Job(1, 3, 20));
+		list.add(new Job(2, 5, 20));
+		list.add(new Job(3, 10, 100));
+		list.add(new Job(4, 6, 70));
+		list.add(new Job(6, 9, 60));
+
 		Collections.sort(list);
 		
 		list.forEach(job->System.out.println(job.end));
@@ -47,7 +49,7 @@ public class WeightedJobScheduling {
 			int compatiableIndx = binarySearch(list,i);
 			if(compatiableIndx != -1)
 			{
-				inclProf +=list.get(compatiableIndx).weight;
+				inclProf +=maxProfitList.get(compatiableIndx);
 			}
 			maxProfitList.add(Math.max(inclProf, maxProfitList.get(i-1)));
 		}
@@ -60,9 +62,9 @@ public class WeightedJobScheduling {
 		while(low<=high)
 		{
 			int mid = (low+high)/2;
-			if(list.get(mid).start>=list.get(i).end)
+			if(list.get(mid).end<=list.get(i).start)
 			{
-				if(list.get(mid+1).start>=list.get(i).end)
+				if(list.get(mid+1).end<=list.get(i).start)
 				{
 					return mid+1;
 				}
