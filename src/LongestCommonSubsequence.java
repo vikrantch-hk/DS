@@ -42,6 +42,7 @@ public class  LongestCommonSubsequence
         {
             for (int j = 0; j<=l2; j++)
             {
+                // i is 0 means length of string 1 is 0 so lcs is 0 j=0 agains means lcs=0
                 if(i==0 ||j==0){
                     arr[i][j]=0;
                 }
