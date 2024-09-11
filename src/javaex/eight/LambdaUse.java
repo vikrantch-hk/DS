@@ -114,5 +114,12 @@ public class LambdaUse {
 		// reduce,count,foreach, min, max
 		// intermediate operations
 		// filter, map, mapToInt, sorted
+
+		String s = "hi hello how are you.";
+        System.out.println(s.chars()
+                .filter(value -> Character.isLetterOrDigit(value))
+                .distinct()
+                .mapToObj(c -> String.valueOf((char) c))
+                .collect(Collectors.joining("")));
 	}
 }
