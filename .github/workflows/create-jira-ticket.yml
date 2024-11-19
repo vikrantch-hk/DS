@@ -35,3 +35,6 @@ jobs:
             }
           }' \
           "$JIRA_BASE_URL/rest/api/2/issue"
+
+
+#tg bot token 7770839833:AAHqqjKaaYUjZFi8M-5j9NSZwKgazHDTc6g
