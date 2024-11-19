@@ -1,1 +1,1 @@
-select * from abcde
+select * from abc
