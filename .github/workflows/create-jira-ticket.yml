@@ -14,7 +14,7 @@ jobs:
 
     - name: Create Jira Ticket
       env:
-        JIRA_BASE_URL: "https://home.atlassian.com/"
+        JIRA_BASE_URL: "https://justbestvikrant.atlassian.net/"
         JIRA_EMAIL: "justbestvikrant@gmail.com"
         JIRA_API_TOKEN: "ATATT3xFfGF0H6Ft4HrZA3UbaQ-5Z_tqDjXsP34iCGuNzHyjh45C6wIVBh5QxoHMroCIWR92QPJ35QG3A6iQcIZAg654WhcsfH-rr-s69Uza6qWWBAyrpanyWQhg5ohUAQsF3xFm8MEE4EkbFOAEJu5kOfToyYA6YKKitsjYy8WS-3plqn8Mhlw=05E59993"
         PR_TITLE: ${{ github.event.pull_request.title }}
