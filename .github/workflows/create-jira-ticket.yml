@@ -12,25 +12,6 @@ jobs:
     - name: Check out the repository
       uses: actions/checkout@v3
 
-    - name: Get PR details
-      id: get_pr_details
-      uses: octokit/request-action@v2.x
-      with:
-        route: GET /repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Extract Reviewer Username
-      id: get_reviewer
-      run: |
-        echo "reviewer_login=$(echo '${{ steps.get_pr_details.outputs.data }}' | jq -r '.requested_reviewers[0]?.login')" >> $GITHUB_ENV
-
-    - name: Fail if no reviewer is assigned
-      if: env.reviewer_login == ''
-      run: |
-        echo "Error: No reviewer assigned to the PR. Assign a reviewer before creating a Jira ticket."
-        exit 1
-
     - name: Create Jira Ticket
       env:
         JIRA_BASE_URL: "https://home.atlassian.com/"
@@ -38,7 +19,6 @@ jobs:
         JIRA_API_TOKEN: "ATATT3xFfGF0H6Ft4HrZA3UbaQ-5Z_tqDjXsP34iCGuNzHyjh45C6wIVBh5QxoHMroCIWR92QPJ35QG3A6iQcIZAg654WhcsfH-rr-s69Uza6qWWBAyrpanyWQhg5ohUAQsF3xFm8MEE4EkbFOAEJu5kOfToyYA6YKKitsjYy8WS-3plqn8Mhlw=05E59993"
         PR_TITLE: ${{ github.event.pull_request.title }}
         PR_URL: ${{ github.event.pull_request.html_url }}
-        REVIEWER: ${{ env.reviewer_login }}
       run: |
         curl -X POST -H "Content-Type: application/json" \
           -u "$JIRA_EMAIL:$JIRA_API_TOKEN" \
@@ -51,10 +31,7 @@ jobs:
               "description": "A pull request was created: '"$PR_URL"'.",
               "issuetype": {
                 "name": "Task"
-              },
-              "assignee": {
-                "name": "'"$REVIEWER"'"
-              }
+                }
             }
           }' \
           "$JIRA_BASE_URL/rest/api/2/issue"
