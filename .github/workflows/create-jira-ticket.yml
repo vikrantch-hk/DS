@@ -25,7 +25,7 @@ jobs:
           --data '{
             "fields": {
               "project": {
-                "key": "YOUR_PROJECT_KEY"
+                "key": "SCRUM"
               },
               "summary": "PR: '"$PR_TITLE"'",
               "description": "A pull request was created: '"$PR_URL"'.",
