@@ -13,6 +13,7 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Create Jira Ticket
+      id: create_jira
       env:
         JIRA_BASE_URL: "https://justbestvikrant.atlassian.net/"
         JIRA_EMAIL: "justbestvikrant@gmail.com"
@@ -20,7 +21,7 @@ jobs:
         PR_TITLE: ${{ github.event.pull_request.title }}
         PR_URL: ${{ github.event.pull_request.html_url }}
       run: |
-        curl -X POST -H "Content-Type: application/json" \
+        RESPONSE=$(curl -s -X POST -H "Content-Type: application/json" \
           -u "$JIRA_EMAIL:$JIRA_API_TOKEN" \
           --data '{
             "fields": {
@@ -34,8 +35,8 @@ jobs:
                 }
             }
           }' \
-          "$JIRA_BASE_URL/rest/api/2/issue"
-
+          "$JIRA_BASE_URL/rest/api/2/issue")
+        
         echo $RESPONSE | jq -r '.key' > jira_key.txt
         echo "JIRA_KEY=$(cat jira_key.txt)" >> $GITHUB_ENV
 
