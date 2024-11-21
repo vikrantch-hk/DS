@@ -27,7 +27,7 @@ public class ElementInRotatedSortedArray {
 				return find(arr, num, mid + 1, r);
 			}
 		}
-		return find(arr, num, mid + 1, r);
+		return find(arr, num, l, mid - 1);
 	}
 
 }
