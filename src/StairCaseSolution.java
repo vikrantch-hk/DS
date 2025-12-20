@@ -1,4 +1,6 @@
 // https://www.geeksforgeeks.org/count-ways-reach-nth-stair/
+
+// for max 2 steps, this is fibonacci question n = (n-1) + (n-2)
 public class StairCaseSolution {
 	// to reach n stair lets say m=3
 	// total ways = (ways to reach (n-1) step+1) +
@@ -18,10 +20,20 @@ public class StairCaseSolution {
 		
 		return res[n];
 	}
+
+	public static int fib(int n){
+		if(n==0 ||n==1)
+			return 1;
+		return fib(n-1)+fib(n-2);
+	}
+
 // complexity o(n*m)
 	public static void main(String[] args) {
 		int s = 4, m = 2; 
         System.out.println("Number of ways = "
-                           + waysToReach(s, m)); 
+                           + waysToReach(s, m));
+
+		System.out.println("Number of ways = "
+				+ fib(s));
 	}
 }
