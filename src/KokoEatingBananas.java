@@ -2,6 +2,9 @@ import java.util.Arrays;
 
 // https://leetcode.com/problems/koko-eating-bananas/description/
 // https://www.youtube.com/watch?v=LzZFUTWE55c
+// Minimum possible speed = 1 banana/hour
+// Maximum possible speed = max pile size (eat one whole pile in 1 hour)
+// [1 .. max(piles)] We binary search this range.
 public class KokoEatingBananas {
     public static int minEatingSpeed(int[] piles, int h) {
         if(h<piles.length)
@@ -15,10 +18,10 @@ public class KokoEatingBananas {
         while(l<=r){
             int mid = l+((r-l)/2);
             if(isPossible(piles,h,mid)){
-                ans = mid;
-                r = mid-1;
+                ans = mid; // this speed works
+                r = mid-1; // try smaller speed
             }else{
-                l = mid+1;
+                l = mid+1; // too slow, need faster
             }
         }
         return ans;
